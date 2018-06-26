@@ -12,6 +12,7 @@ import echarts from './views/charts/echarts.vue'
 
 import bpmi046 from './views/kaoqin/bpmi046.vue'
 import bpmi047 from './views/kaoqin/bpmi047.vue'
+import nav3 from './views/kaoqin/nav3.vue'
 
 let routes = [
     {
@@ -59,7 +60,7 @@ let routes = [
         name: '地图',
         iconCls: 'el-icon-message',
 		children: [
-            { path: '/nav3', component: bpmi047}
+            { path: '/nav3', component: nav3}
         ]
     },
     {
