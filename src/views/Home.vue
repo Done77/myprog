@@ -9,7 +9,7 @@
 					</div>
 				</div>
 				<!--导航菜单-->
-				<div class="laymainleft" >
+				<div class="laymainleft" v-if="!collapsed" >
 					<el-menu :default-active="$route.path" class="el-menu-vertical-demo mymenu" @open="handleopen" @close="handleclose" @select="handleselect"
 						 unique-opened router collapse-transition="false" v-if="!collapsed">
 						 
