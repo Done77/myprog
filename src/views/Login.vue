@@ -7,7 +7,7 @@
     <el-form-item prop="checkPass">
       <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
+    
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
@@ -17,14 +17,15 @@
 
 <script>
   import { requestLogin } from '../api/api';
+	import md5 from 'js-md5';
   //import NProgress from 'nprogress'
   export default {
     data() {
       return {
         logining: false,
         ruleForm2: {
-          account: 'admin',
-          checkPass: '123456'
+          account: 'licfa',
+          checkPass: '888888'
         },
         rules2: {
           account: [
@@ -50,20 +51,23 @@
             //_this.$router.replace('/table');
             this.logining = true;
             //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+            var loginParams = { useracc: this.ruleForm2.account, password: (md5(this.ruleForm2.checkPass)).toUpperCase() };
             requestLogin(loginParams).then(data => {
               this.logining = false;
               //NProgress.done();
-              let { msg, status, useracc } = data;
+              let { msg, status, useracc,token } = data;
               if (status !== 'ok') {
-                this.$message({
-                  message: msg,
-                  type: 'error'
-                });
+								this.$notify({
+									title: '提示',
+									message: '用户名或密码错误！',
+									type: 'error'
+								});				
+								
               } else {
-		let user={name:"超级管理员"};
+								let user={name:"超级管理员"};
                 sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/bpmi047' });
+								sessionStorage.setItem('token', token);
+                this.$router.push({ path: '/project' });
               }
             });
           } else {

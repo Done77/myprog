@@ -23,14 +23,14 @@
 				</div>
 				<el-row type="flex" class="row-bg layfooter" justify="end" style="line-height:100px;" >				  				  
 				  <el-col :span="12" v-if="!collapsed" style="text-align:center;">
-					<el-button>
-						<icon class="el-icon-setting"></icon>
+					<el-button @click.prevent="setting">
+						<i class="el-icon-setting"></i>
 					</el-button>
 				  </el-col>
 				  <el-col :span="collapsed?24:12" style="text-align:center;padding-right:5px;">
 						<el-button @click.prevent="collapse">
-							<icon class="el-icon-d-arrow-left" v-if="!collapsed" ></icon>
-							<icon class="el-icon-d-arrow-right" v-if="collapsed" ></icon>
+							<i class="el-icon-d-arrow-left" v-if="!collapsed" ></i>
+							<i class="el-icon-d-arrow-right" v-if="collapsed" ></i>
 						</el-button>	
 				  </el-col>
 				</el-row>
@@ -57,7 +57,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'LOGO',
+				sysName:'服务器维护',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',
@@ -102,6 +102,11 @@
 			//折叠导航栏
 			collapse:function(){
 				this.collapsed=!this.collapsed;
+			},
+			//显示设置界面
+			setting:function(){
+				console.log('setting');
+				this.$router.push('/setting')
 			},
 			showMenu(i,status){
 				this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-'+i)[0].style.display=status?'block':'none';
